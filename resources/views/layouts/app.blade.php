@@ -66,7 +66,10 @@
                         <li class="menu-header">Menu</li>
                         <li class="active" data-toggle="tooltip" data-placement="right" title=""
                             data-original-title="Halaman Utama">
-                            <a href="dashboard.php"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+                            <a href="{{ route('sekolah.dashboard') }}">
+                                <i class="ion ion-speedometer"></i>
+                                <span>Dashboard</span>
+                            </a>
                         </li>
                         <li data-toggle="tooltip" data-placement="right" data-original-title="Data Siswa">
                             <a href="{{ route('siswa.data') }}"><i class="ion ion-ios-people"></i> Data Siswa</a>
