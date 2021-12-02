@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Kelas;
-use App\Models\Siswa;
 use Illuminate\Http\Request;
 
-class SiswaController extends Controller
+class KelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +15,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    public function manage()
-    {
-        $siswas = Siswa::all();
-        return view('siswa.manage', compact('siswas'));
+        $kelas = Kelas::all();
+        return view('sekolah.kelas.index', compact('kelas'));
     }
 
     /**
@@ -32,9 +26,8 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        $listKelas = Kelas::select('nama_kelas')->get();
         $listJurusan = Jurusan::select('nama_jurusan')->get();
-        return view('siswa.add', compact('listKelas', 'listJurusan'));
+        return view('sekolah.kelas.add', compact('listJurusan'));
     }
 
     /**
@@ -51,10 +44,10 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Kelas $kelas)
     {
         //
     }
@@ -62,10 +55,10 @@ class SiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Kelas $kelas)
     {
         //
     }
@@ -74,10 +67,10 @@ class SiswaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Kelas $kelas)
     {
         //
     }
@@ -85,10 +78,10 @@ class SiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kelas $kelas)
     {
         //
     }

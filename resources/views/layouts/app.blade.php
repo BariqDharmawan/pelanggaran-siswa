@@ -64,33 +64,36 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Menu</li>
-                        <li class="active" data-toggle="tooltip" data-placement="right" title=""
+                        <li class="@if(Str::contains(request()->url(), route('sekolah.dashboard'))) active @endif" data-toggle="tooltip" data-placement="right" title=""
                             data-original-title="Halaman Utama">
                             <a href="{{ route('sekolah.dashboard') }}">
                                 <i class="ion ion-speedometer"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Siswa">
+                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Siswa"
+                        class="@if(Str::contains(request()->url(), route('siswa.data'))) active @endif">
                             <a href="{{ route('siswa.data') }}"><i class="ion ion-ios-people"></i> Data Siswa</a>
                         </li>
-                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jurusan">
-                            <a href="data_jurusan.php"><i class="ion ion-university"></i> Data Jurusan</a>
+                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jurusan"
+                        class="@if(Str::contains(request()->url(), route('sekolah.jurusan.index'))) active @endif">
+                            <a href="{{ route('sekolah.jurusan.index') }}">
+                                <i class="ion ion-university"></i> Data Jurusan
+                            </a>
                         </li>
-                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Kelas">
-                            <a href="data_kelas.php"><i class="ion ion-ios-book"></i> Data Kelas</a>
+                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Kelas"
+                        class="@if(Str::contains(request()->url(), route('sekolah.kelas.index'))) active @endif">
+                            <a href="{{ route('sekolah.kelas.index') }}"><i class="ion ion-ios-book"></i> Data Kelas</a>
                         </li>
-                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jenis Pelanggaran">
-                            <a href="data_jenispelanggaran.php"><i class="ion ion-document-text"></i> Jenis Pelanggaran</a>
+                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jenis Pelanggaran"
+                        class="@if(Str::contains(request()->url(), route('sekolah.pelanggaran.index'))) active @endif">
+                            <a href="{{ route('sekolah.pelanggaran.index') }}"><i class="ion ion-document-text"></i> Jenis Pelanggaran</a>
                         </li>
 
                         @if (auth()->user()->role == 'admin')
-                            <li data-toggle='tooltip' data-placement='right' data-original-title='Data Akun Pengguna'>
-                                <a href='data_akun.php'><i class='ion ion-key'></i> Manajemen Akun</a>
-                            </li>
-                        @elseif(auth()->user()->role == 'pegawai')
-                            <li data-toggle='tooltip' data-placement='right' data-original-title='Data Pelanggaran Siswa'>
-                                <a href='data_pelanggaran.php'><i class='ion ion-android-alert'></i> Pelanggaran Siswa</a>
+                            <li data-toggle='tooltip' data-placement='right' data-original-title='Data Akun Pengguna'
+                            class="@if(Str::contains(request()->url(), route('sekolah.akun.index'))) active @endif">
+                                <a href='{{ route('sekolah.akun.index') }}'><i class='ion ion-key'></i> Manajemen Akun</a>
                             </li>
                         @endif
                     </ul>
@@ -137,5 +140,6 @@
     <script src="{{ asset('js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('modules/summernote/summernote-lite.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 </body>
 </html>

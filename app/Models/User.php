@@ -14,11 +14,15 @@ class User extends Authenticatable
     protected $primaryKey = 'id_akun';
 
     protected $fillable = [
-        'name',
+        'id_akun',
+        'nama',
         'username',
         'password',
         'role'
     ];
+
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $hidden = [
         'password',

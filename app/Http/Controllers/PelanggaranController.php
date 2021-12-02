@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jurusan;
-use App\Models\Kelas;
-use App\Models\Siswa;
+use App\Models\Pelanggaran;
 use Illuminate\Http\Request;
 
-class SiswaController extends Controller
+class PelanggaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +14,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    public function manage()
-    {
-        $siswas = Siswa::all();
-        return view('siswa.manage', compact('siswas'));
+        $jenisPelanggaran = Pelanggaran::all();
+        return view('sekolah.pelanggaran.jenis', compact('jenisPelanggaran'));
     }
 
     /**
@@ -32,9 +25,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        $listKelas = Kelas::select('nama_kelas')->get();
-        $listJurusan = Jurusan::select('nama_jurusan')->get();
-        return view('siswa.add', compact('listKelas', 'listJurusan'));
+        return view('sekolah.pelanggaran.add');
     }
 
     /**
@@ -51,10 +42,10 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pelanggaran  $pelanggaran
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pelanggaran $pelanggaran)
     {
         //
     }
@@ -62,10 +53,10 @@ class SiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pelanggaran  $pelanggaran
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pelanggaran $pelanggaran)
     {
         //
     }
@@ -74,10 +65,10 @@ class SiswaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Pelanggaran  $pelanggaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pelanggaran $pelanggaran)
     {
         //
     }
@@ -85,10 +76,10 @@ class SiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pelanggaran  $pelanggaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pelanggaran $pelanggaran)
     {
         //
     }
