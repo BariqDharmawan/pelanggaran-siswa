@@ -1,7 +1,3 @@
-@php
-    $doesntHaveNav = true;
-@endphp
-
 @extends('layouts.app')
 
 @section('content')
@@ -18,9 +14,11 @@
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+                                @csrf
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" name="username" tabindex="1" required autofocus>
+                                    <input type="text" class="form-control" name="username" tabindex="1" required
+                                        autofocus>
                                     <div class="invalid-feedback">
                                         Username harap diisi
                                     </div>

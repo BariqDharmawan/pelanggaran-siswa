@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -16,6 +18,11 @@ class SiswaController extends Controller
         //
     }
 
+    public function manage()
+    {
+        return view('siswa.manage');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +30,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        $listKelas = Kelas::select('nama_kelas')->get();
+        $listJurusan = Jurusan::select('nama_jurusan')->get();
+        return view('siswa.add', compact('listKelas', 'listJurusan'));
     }
 
     /**

@@ -15,65 +15,102 @@
 </head>
 <body>
     <div id="app">
-        @empty($doesntHaveNav)
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
+        <div class="main-wrapper">
+            <div class="navbar-bg"></div>
+            @auth
+            <nav class="navbar navbar-expand-lg main-navbar">
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li>
+                            <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg">
+                                <i class="ion ion-navicon-round"></i>
+                            </a>
+                        </li>
                     </ul>
+                </form>
+                <ul class="navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+                            <i class="ion ion-android-person d-lg-none"></i>
+                            <div class="d-sm-none d-lg-inline-block">Halo, {{ auth()->user()->role }}</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="{{ route('logout') }}" class="dropdown-item has-icon"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="ion ion-log-out"></i> Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="main-sidebar">
+                <aside id="sidebar-wrapper">
+                    <div class="sidebar-brand">
+                        <a href="index.html">SIPS</a>
+                    </div>
+                    <div class="sidebar-user">
+                        <div class="sidebar-user-picture">
+                            <img alt="image" src="{{ asset('img/avatar/avatar.png') }}">
+                        </div>
+                        <div class="sidebar-user-details">
+                            <div class="user-name">{{ auth()->user()->nama }}</div>
+                            <div class="user-role">
+                                {{ auth()->user()->role }}
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="menu-header">Menu</li>
+                        <li class="active" data-toggle="tooltip" data-placement="right" title=""
+                            data-original-title="Halaman Utama">
+                            <a href="dashboard.php"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+                        </li>
+                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Siswa">
+                            <a href="{{ route('siswa.data') }}"><i class="ion ion-ios-people"></i> Data Siswa</a>
+                        </li>
+                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jurusan">
+                            <a href="data_jurusan.php"><i class="ion ion-university"></i> Data Jurusan</a>
+                        </li>
+                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Kelas">
+                            <a href="data_kelas.php"><i class="ion ion-ios-book"></i> Data Kelas</a>
+                        </li>
+                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jenis Pelanggaran">
+                            <a href="data_jenispelanggaran.php"><i class="ion ion-document-text"></i> Jenis Pelanggaran</a>
+                        </li>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                        @if (auth()->user()->role == 'admin')
+                            <li data-toggle='tooltip' data-placement='right' data-original-title='Data Akun Pengguna'>
+                                <a href='data_akun.php'><i class='ion ion-key'></i> Manajemen Akun</a>
                             </li>
-                        @endguest
+                        @elseif(auth()->user()->role == 'pegawai')
+                            <li data-toggle='tooltip' data-placement='right' data-original-title='Data Pelanggaran Siswa'>
+                                <a href='data_pelanggaran.php'><i class='ion ion-android-alert'></i> Pelanggaran Siswa</a>
+                            </li>
+                        @endif
                     </ul>
-                </div>
+                </aside>
             </div>
-        </nav>
-        @endempty
+            @endauth
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <div class="main-content @guest pl-0 @endguest">
+                <section class="section">
+                    @hasSection('title-page')
+                        <h1 class="section-header">
+                            <div>@yield('title-page')</div>
+                        </h1>
+                    @endif
+                    @yield('content')
+                </section>
+            </div>
+            @auth
+            <footer class="main-footer">
+                <div class="footer-left">Kelompok RPL SIPS</div>
+            </footer>
+            @endauth
+        </div>
     </div>
 
     <script src="{{ asset('modules/jquery.min.js') }}"></script>

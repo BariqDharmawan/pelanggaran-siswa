@@ -26,9 +26,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
 
-    public function redirectTo()
+    protected function redirectTo()
     {
         if (auth()->user()->role == 'siswa') {
             return 'siswa/dashboard';
