@@ -16,7 +16,9 @@
 <body>
     <div id="app">
         <div class="main-wrapper">
+            @if (Route::currentRouteName() != 'login')
             <div class="navbar-bg"></div>
+            @endif
             @auth
             <nav class="navbar navbar-expand-lg main-navbar">
                 <form class="form-inline mr-auto">

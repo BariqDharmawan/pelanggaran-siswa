@@ -34,7 +34,7 @@
                         <td>{{ $data['username'] }}</td>
                         <td>{{ $data['role'] }}</td>
                         <td>
-                            <a href='{{ route('sekolah.akun.create', $data['id_akun']) }}' class='btn btn-sm btn-blue' style='margin: 5px'>
+                            <a href='{{ route('sekolah.akun.edit', $data['id_akun']) }}' class='btn btn-sm btn-blue' style='margin: 5px'>
                                 <span class='ion-android-create' aria-hidden='true'></span>
                             </a>
                             <a href='{{ route('sekolah.akun.destroy', $data['id_akun']) }}' class='btn btn-sm btn-danger'

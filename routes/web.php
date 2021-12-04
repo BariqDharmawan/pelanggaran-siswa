@@ -18,7 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('sekolah')->name('sekolah.')->middleware('auth')->group(function () {
        Route::get('dashboard', DashboardController::class)->name('dashboard');
        Route::resource('jurusan', JurusanController::class);
-       Route::resource('kelas', KelasController::class);
+       Route::resource('kelas', KelasController::class)->except('show', 'edit', 'update');
+       Route::get('kelas/{kelas}', [KelasController::class, 'edit'])->name('kelas.edit');
+       Route::put('kelas/{kelas}', [KelasController::class, 'update'])->name('kelas.update');
        Route::resource('pelanggaran', PelanggaranController::class);
        Route::resource('akun', AkunController::class);
     });

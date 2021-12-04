@@ -38,18 +38,9 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Kelas::create($request->except('_token'));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kelas $kelas)
-    {
-        //
+        return redirect()->route('sekolah.kelas.index')->with('success', "Berhasil menambah kelas");
     }
 
     /**
@@ -60,7 +51,9 @@ class KelasController extends Controller
      */
     public function edit(Kelas $kelas)
     {
-        //
+        $listJurusan = Jurusan::select('nama_jurusan')->get();
+
+        return view('sekolah.kelas.edit', compact('kelas', 'listJurusan'));
     }
 
     /**
@@ -72,7 +65,9 @@ class KelasController extends Controller
      */
     public function update(Request $request, Kelas $kelas)
     {
-        //
+        $kelas->update($request->except('_token'));
+
+        return redirect()->route('sekolah.kelas.index')->with('success', "Berhasil mengedit kelas");
     }
 
     /**
@@ -83,6 +78,6 @@ class KelasController extends Controller
      */
     public function destroy(Kelas $kelas)
     {
-        //
+        $kelas->delete();
     }
 }

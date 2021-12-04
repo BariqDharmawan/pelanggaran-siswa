@@ -22,7 +22,7 @@ class CreateSiswasTable extends Migration
             $table->text('alamat');
             $table->string('no_telepon');
             $table->string('id_akun');
-            $table->integer('total_poin');
+            $table->integer('total_poin')->default(0);
             $table->timestamps();
         });
     }

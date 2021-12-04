@@ -6,15 +6,17 @@
 <div class="card">
     <div class="card-primary">
         <div class="card-body">
-            <form method="POST" class="needs-validation" action="{{ route('sekolah.jurusan.store') }}">
+            <form method="POST" class="needs-validation" action="{{ route('sekolah.jurusan.update', $jurusan->id) }}">
                 @csrf @method('PUT')
                 <div class="form-group">
                     <label>Nama Jurusan</label>
-                    <input type="text" class="form-control" name="nama_jurusan" tabindex="1" required>
+                    <input type="text" class="form-control" name="nama_jurusan" value="{{ $jurusan->nama_jurusan }}"
+                    tabindex="1" required>
                 </div>
                 <div class="form-group">
                     <label>Keterangan</label>
-                    <input type="text" class="form-control" name="keterangan" tabindex="1" required>
+                    <input type="text" class="form-control" name="keterangan" value="{{ $jurusan->keterangan }}"
+                    tabindex="1" required>
                 </div>
                 <br>
                 <div class="form-group">

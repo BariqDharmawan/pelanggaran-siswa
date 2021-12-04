@@ -39,7 +39,7 @@
 
                         @if (auth()->user()->role == 'admin')
                         <td>
-                            <a href='edit_jenispelanggaran.php?id=$id_jenis' class='btn btn-sm btn-blue'
+                            <a href='{{ route('sekolah.pelanggaran.edit', $data->id) }}' class='btn btn-sm btn-blue'
                                 style='margin: 5px'>
                                 <span class='ion-android-create' aria-hidden='true'></span>
                             </a>

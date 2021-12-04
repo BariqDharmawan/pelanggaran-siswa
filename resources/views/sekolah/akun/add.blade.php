@@ -6,14 +6,15 @@
 <div class="card">
     <div class="card-primary">
       <div class="card-body">
-       <form method="POST" class="needs-validation">
+       <form method="POST" class="needs-validation" action="{{ route('sekolah.akun.store') }}">
+        @csrf
         <div class="form-group">
           <label>ID</label>
           <input type="text" class="form-control" name="id_akun" tabindex="1" required>
         </div>
         <div class="form-group">
           <label>Nama Pengguna</label>
-          <input type="text" class="form-control" name="nama_pengguna" tabindex="1" required>
+          <input type="text" class="form-control" name="nama" tabindex="1" required>
         </div>
         <div class="form-group">
           <label>Username</label>
@@ -33,33 +34,10 @@
         </div>
         <br>
         <div class="form-group">
-          <button type="submit" name="submit" class="btn btn-blue" tabindex="1">
+          <button type="submit" class="btn btn-blue" tabindex="1">
             <i class="ion ion-android-checkbox-outline" style="margin-right: 10px"></i>
             Simpan
           </button>
-          <?php
-        //   include "../koneksi_db.php";
-        //   if(isset($_POST['submit'])){
-
-        //     $id_akun = $_POST['id_akun'];
-        //     $nama_pengguna = $_POST['nama_pengguna'];
-        //     $username = $_POST['username'];
-        //     $password = $_POST['password'];
-        //     $role = $_POST['role'];
-
-        //     $simpan_data = mysqli_query($koneksi, "INSERT INTO USER VALUES ('$id_akun', '$nama_pengguna', '$username', '$password', '$role')");
-
-        //     if ($simpan_data) {
-        //       echo "<script>window.alert('Data berhasil disimpan!');
-        //       window.location.href='data_akun.php';
-        //       </script>";
-        //     }
-        //     else {
-        //       echo "<script>window.alert('Data gagal disimpan!');
-        //       </script>";
-        //     }
-        //   }
-          ?>
         </div>
       </form>
     </div>

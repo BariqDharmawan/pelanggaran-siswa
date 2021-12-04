@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AkunController extends Controller
 {
@@ -15,7 +16,6 @@ class AkunController extends Controller
     public function index()
     {
         $akun = User::all();
-        // dd($akun);
         return view('sekolah.akun.index', compact('akun'));
     }
 
@@ -37,18 +37,9 @@ class AkunController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        User::create($request->except('_token'));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
+        return redirect()->route('sekolah.akun.index')->with('success', "Berhasil menambah akun");
     }
 
     /**
@@ -57,9 +48,10 @@ class AkunController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $akun)
     {
-        //
+        // dd($akun);
+        return view('sekolah.akun.edit', compact('akun'));
     }
 
     /**
@@ -69,9 +61,19 @@ class AkunController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $akun)
     {
-        //
+        $akun->nama = $request->nama;
+        $akun->username = $request->username;
+
+        if ($request->has('password')) {
+            $akun->password = Hash::make($request->password);
+        }
+        $akun->role = $request->role;
+
+        $akun->save();
+
+        return redirect()->route('sekolah.akun.index')->with('success', "Berhasil mengedit akun $akun->username");
     }
 
     /**
@@ -82,6 +84,6 @@ class AkunController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
     }
 }

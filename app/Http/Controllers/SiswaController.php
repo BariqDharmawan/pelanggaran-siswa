@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -45,18 +46,26 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Siswa::create([
+            'NIS' => $request->NIS,
+            'nama_siswa' => $request->nama_siswa,
+            'nama_kelas' => $request->nama_kelas,
+            'nama_jurusan' => $request->nama_jurusan,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'no_telepon' => $request->no_telepon,
+            'id_akun' => $request->id_akun
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        User::create([
+            'id_akun' => $request->id_akun,
+            'nama' => $request->nama_siswa,
+            'username' => $request->username,
+            'password' => $request->password,
+            'role' => 'siswa',
+        ]);
+
+        return redirect()->route('siswa.data')->with('success', 'Berhasil menambah siswa');
     }
 
     /**
@@ -65,9 +74,15 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Siswa $siswa)
     {
-        //
+        // dd($siswa);
+        $listKelas = Kelas::select('nama_kelas')->get();
+        $listJurusan = Jurusan::select('nama_jurusan')->get();
+
+        $username = User::where('nama', $siswa->nama_siswa)->first()->username;
+
+        return view('siswa.edit', compact('siswa', 'listKelas', 'listJurusan', 'username'));
     }
 
     /**
@@ -77,9 +92,19 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Siswa $siswa)
     {
-        //
+        $siswa->NIS = $request->NIS;
+        $siswa->nama_siswa = $request->nama_siswa;
+        $siswa->nama_kelas = $request->nama_kelas;
+        $siswa->nama_jurusan = $request->nama_jurusan;
+        $siswa->jenis_kelamin = $request->jenis_kelamin;
+        $siswa->alamat = $request->alamat;
+        $siswa->no_telepon = $request->no_telepon;
+
+        $siswa->save();
+
+        return redirect()->route('siswa.data')->with('success', "Berhasil mengubah data siswa $siswa->nama_siswa");
     }
 
     /**
@@ -88,8 +113,10 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Siswa $siswa)
     {
-        //
+        $siswa->delete();
+
+        return redirect()->route('siswa.data')->with('success', "Berhasil menghapus data siswa");
     }
 }

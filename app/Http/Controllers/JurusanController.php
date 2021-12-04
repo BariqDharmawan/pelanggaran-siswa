@@ -36,18 +36,9 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Jurusan::create($request->except('_token'));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Jurusan  $jurusan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Jurusan $jurusan)
-    {
-        //
+        return redirect()->route('sekolah.jurusan.index')->with('success', "Berhasil menambah jurusan");
     }
 
     /**
@@ -58,7 +49,7 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        //
+        return view('sekolah.jurusan.edit', compact('jurusan'));
     }
 
     /**
@@ -70,7 +61,11 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        //
+        $jurusan->update($request->except('_token'));
+
+        return redirect()->route('sekolah.jurusan.index')->with(
+            'success', "Berhasil mengubah jurusan $jurusan->nama_jurusan"
+        );
     }
 
     /**
@@ -81,6 +76,8 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        //
+        $jurusan->delete();
+
+        return redirect()->route('siswa.data')->with('success', "Berhasil menghapus jurusan");
     }
 }

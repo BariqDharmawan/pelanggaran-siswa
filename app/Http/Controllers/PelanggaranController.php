@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisPelanggaran;
 use App\Models\Pelanggaran;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PelanggaranController extends Controller
      */
     public function index()
     {
-        $jenisPelanggaran = Pelanggaran::all();
+        $jenisPelanggaran = JenisPelanggaran::all();
         return view('sekolah.pelanggaran.jenis', compact('jenisPelanggaran'));
     }
 
@@ -36,18 +37,9 @@ class PelanggaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        JenisPelanggaran::create($request->except('_token'));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pelanggaran  $pelanggaran
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pelanggaran $pelanggaran)
-    {
-        //
+        return redirect()->route('sekolah.pelanggaran.index')->with('success', "Berhasil menambah jenis pelanggaran");
     }
 
     /**
@@ -58,7 +50,7 @@ class PelanggaranController extends Controller
      */
     public function edit(Pelanggaran $pelanggaran)
     {
-        //
+        return view('sekolah.pelanggaran.edit', compact('pelanggaran'));
     }
 
     /**
@@ -68,9 +60,11 @@ class PelanggaranController extends Controller
      * @param  \App\Models\Pelanggaran  $pelanggaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pelanggaran $pelanggaran)
+    public function update(Request $request, JenisPelanggaran $pelanggaran)
     {
-        //
+        $pelanggaran->update($request->except('_token'));
+
+        return redirect()->route('sekolah.pelanggaran.index')->with('success', "Berhasil mengedit jenis pelanggaran");
     }
 
     /**
@@ -81,6 +75,8 @@ class PelanggaranController extends Controller
      */
     public function destroy(Pelanggaran $pelanggaran)
     {
-        //
+        $pelanggaran->delete();
+
+        return redirect()->route('siswa.data')->with('success', "Berhasil menghapus jenis pelanggaran");
     }
 }
