@@ -7,17 +7,17 @@
     <div class="card-primary">
       <div class="card-body">
         <form method="POST" class="needs-validation"
-        action="{{ route('sekolah.pelanggaran.update', $pelanggaran->id) }}">
+        action="{{ route('sekolah.jenis-pelanggaran.update', $jenisPelanggaran->id) }}">
             @csrf @method('PUT')
           <div class="form-group">
             <label>Jenis Pelanggaran</label>
-            <input type="text" class="form-control" name="jenis_pelanggaran" value="{{ $pelanggaran->jenis_pelanggaran }}"
+            <input type="text" class="form-control" name="jenis_pelanggaran" value="{{ $jenisPelanggaran->jenis_pelanggaran }}"
             tabindex="1" required>
           </div>
           <div class="form-group">
             <label>Poin</label>
             <input type="number" class="form-control" name="poin"
-            value="{{ $pelanggaran->poin }}" tabindex="1" required>
+            value="{{ $jenisPelanggaran->poin }}" tabindex="1" required>
           </div>
           <br>
           <div class="form-group">

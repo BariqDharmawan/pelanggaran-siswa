@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-primary">
       <div class="card-body">
-        <form method="POST" class="needs-validation" action="{{ route('sekolah.pelanggaran.store') }}">
+        <form method="POST" class="needs-validation" action="{{ route('sekolah.jenis-pelanggaran.store') }}">
             @csrf
           <div class="form-group">
             <label>Jenis Pelanggaran</label>

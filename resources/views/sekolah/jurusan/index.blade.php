@@ -42,10 +42,12 @@
                             <a href='{{ route('sekolah.jurusan.edit', $data['id']) }}' class='btn btn-sm btn-blue' style='margin: 5px'>
                                 <span class='ion-android-create' aria-hidden='true'></span>
                             </a>
-                            <a href='{{ route('sekolah.jurusan.destroy', $data['id']) }}' class='btn btn-sm btn-danger'
-                            style='margin: 5px'>
-                                <span class='ion-trash-a' aria-hidden='true'></span>
-                            </a>
+                            <form action="{{ route('sekolah.jurusan.destroy', $data['id']) }}" method="post">
+                                @csrf @method('DELETE')
+                                <button type="submit" class='btn btn-sm btn-danger' style='margin: 5px'>
+                                    <span class='ion-trash-a' aria-hidden='true'></span>
+                                </button>
+                            </form>
                         </td>
                         @endif
                     </tr>

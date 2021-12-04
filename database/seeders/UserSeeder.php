@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'nama'=>'Jojo',
             'username'=>'jojo',
             'password'=>Hash::make('gakadapassword'),
+            'plain_password' => 'gakadapassword',
             'role'=>'siswa'
         ]);
 
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
             'nama'=>'Rachma Adzima',
             'username'=>'admin_ama',
             'password'=>Hash::make('admin123'),
+            'plain_password' => 'admin123',
             'role'=>'admin'
         ]);
 
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
             'nama'=>'Jasmine Athira',
             'username'=>'pegawai_jasmine',
             'password'=>Hash::make('pegawai123'),
+            'plain_password' => 'pegawai123',
             'role'=>'pegawai'
         ]);
 
@@ -50,6 +53,7 @@ class UserSeeder extends Seeder
             'nama'=>'Almira Van Fadhilla',
             'username'=>'almiravan',
             'password'=>Hash::make('mira123'),
+            'plain_password' => 'mira123',
             'role'=>'admin'
         ]);
 
@@ -60,6 +64,7 @@ class UserSeeder extends Seeder
             'nama'=>'Bariq',
             'username'=>'bariq',
             'password'=>Hash::make('gakadapassword'),
+            'plain_password' => 'gakadapassword',
             'role'=>'siswa'
         ]);
     }

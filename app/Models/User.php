@@ -18,11 +18,16 @@ class User extends Authenticatable
         'nama',
         'username',
         'password',
+        'plain_password',
         'role'
     ];
 
     public $incrementing = false;
     protected $keyType = 'string';
+
+    protected $casts = [
+        'plain_password' => 'encrypted'
+    ];
 
     protected $hidden = [
         'password',

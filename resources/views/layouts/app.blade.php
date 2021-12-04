@@ -88,8 +88,8 @@
                             <a href="{{ route('sekolah.kelas.index') }}"><i class="ion ion-ios-book"></i> Data Kelas</a>
                         </li>
                         <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jenis Pelanggaran"
-                        class="@if(Str::contains(request()->url(), route('sekolah.pelanggaran.index'))) active @endif">
-                            <a href="{{ route('sekolah.pelanggaran.index') }}"><i class="ion ion-document-text"></i> Jenis Pelanggaran</a>
+                        class="@if(Str::contains(request()->url(), route('sekolah.jenis-pelanggaran.index'))) active @endif">
+                            <a href="{{ route('sekolah.jenis-pelanggaran.index') }}"><i class="ion ion-document-text"></i> Jenis Pelanggaran</a>
                         </li>
 
                         @if (auth()->user()->role == 'admin')

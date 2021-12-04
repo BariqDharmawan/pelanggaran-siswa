@@ -78,6 +78,6 @@ class JurusanController extends Controller
     {
         $jurusan->delete();
 
-        return redirect()->route('siswa.data')->with('success', "Berhasil menghapus jurusan");
+        return redirect()->route('sekolah.jurusan.index')->with('success', "Berhasil menghapus jurusan");
     }
 }

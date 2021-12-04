@@ -6,7 +6,7 @@ use App\Models\JenisPelanggaran;
 use App\Models\Pelanggaran;
 use Illuminate\Http\Request;
 
-class PelanggaranController extends Controller
+class JenisPelanggaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class PelanggaranController extends Controller
     public function index()
     {
         $jenisPelanggaran = JenisPelanggaran::all();
-        return view('sekolah.pelanggaran.jenis', compact('jenisPelanggaran'));
+        return view('sekolah.jenis-pelanggaran.jenis', compact('jenisPelanggaran'));
     }
 
     /**
@@ -26,7 +26,7 @@ class PelanggaranController extends Controller
      */
     public function create()
     {
-        return view('sekolah.pelanggaran.add');
+        return view('sekolah.jenis-pelanggaran.add');
     }
 
     /**
@@ -39,7 +39,7 @@ class PelanggaranController extends Controller
     {
         JenisPelanggaran::create($request->except('_token'));
 
-        return redirect()->route('sekolah.pelanggaran.index')->with('success', "Berhasil menambah jenis pelanggaran");
+        return redirect()->route('sekolah.jenis-pelanggaran.index')->with('success', "Berhasil menambah jenis pelanggaran");
     }
 
     /**
@@ -48,35 +48,35 @@ class PelanggaranController extends Controller
      * @param  \App\Models\Pelanggaran  $pelanggaran
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pelanggaran $pelanggaran)
+    public function edit(JenisPelanggaran $jenisPelanggaran)
     {
-        return view('sekolah.pelanggaran.edit', compact('pelanggaran'));
+        return view('sekolah.jenis-pelanggaran.edit', compact('jenisPelanggaran'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pelanggaran  $pelanggaran
+     * @param  \App\Models\Pelanggaran  $jenisPelanggaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JenisPelanggaran $pelanggaran)
+    public function update(Request $request, JenisPelanggaran $jenisPelanggaran)
     {
-        $pelanggaran->update($request->except('_token'));
+        $jenisPelanggaran->update($request->except('_token'));
 
-        return redirect()->route('sekolah.pelanggaran.index')->with('success', "Berhasil mengedit jenis pelanggaran");
+        return redirect()->route('sekolah.jenis-pelanggaran.index')->with('success', "Berhasil mengedit jenis pelanggaran");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pelanggaran  $pelanggaran
+     * @param  \App\Models\Pelanggaran  $jenisPelanggaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pelanggaran $pelanggaran)
+    public function destroy(JenisPelanggaran $jenisPelanggaran)
     {
-        $pelanggaran->delete();
+        $jenisPelanggaran->delete();
 
-        return redirect()->route('siswa.data')->with('success', "Berhasil menghapus jenis pelanggaran");
+        return redirect()->route('sekolah.jenis-pelanggaran.index')->with('success', "Berhasil menghapus jenis pelanggaran");
     }
 }

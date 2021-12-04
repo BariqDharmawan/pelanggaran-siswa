@@ -46,10 +46,12 @@
                             <a href='{{ route('siswa.edit', $data->NIS) }}' class='btn btn-sm btn-blue' style='margin: 5px'>
                                 <span class='ion-android-create' aria-hidden='true'></span>
                             </a>
-                            <a href='{{ route('siswa.destroy', $data->NIS) }}' class='btn btn-sm btn-danger'
-                                style='margin: 5px'>
-                                <span class='ion-trash-a' aria-hidden='true'></span>
-                            </a>
+                            <form action="{{ route('siswa.destroy', $data->NIS) }}" method="POST">
+                                @csrf @method('DELETE')
+                                <button type="submit" class='btn btn-sm btn-danger'style='margin: 5px'>
+                                    <span class='ion-trash-a' aria-hidden='true'></span>
+                                </button>
+                            </form>
                         </td>
                         @endif
                     </tr>
