@@ -66,37 +66,71 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Menu</li>
-                        <li class="@if(Str::contains(request()->url(), route('sekolah.dashboard'))) active @endif" data-toggle="tooltip" data-placement="right" title=""
+
+                        @if (auth()->user()->role == 'siswa')
+                        <li class="@if(Route::currentRouteName() == 'siswa.index') active @endif" data-toggle="tooltip" data-placement="right" title=""
                             data-original-title="Halaman Utama">
-                            <a href="{{ route('sekolah.dashboard') }}">
+                            <a href="{{ route('siswa.index') }}">
                                 <i class="ion ion-speedometer"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Siswa"
-                        class="@if(Str::contains(request()->url(), route('siswa.data'))) active @endif">
-                            <a href="{{ route('siswa.data') }}"><i class="ion ion-ios-people"></i> Data Siswa</a>
-                        </li>
-                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jurusan"
-                        class="@if(Str::contains(request()->url(), route('sekolah.jurusan.index'))) active @endif">
-                            <a href="{{ route('sekolah.jurusan.index') }}">
-                                <i class="ion ion-university"></i> Data Jurusan
+                        <li class="@if(Route::currentRouteName() == 'siswa.show') active @endif" data-toggle="tooltip" data-placement="right" title=""
+                            data-original-title="Halaman Utama">
+                            <a href="{{ route('siswa.show', $profile->NIS) }}">
+                                <i class="ion ion-speedometer"></i>
+                                <span>Profile</span>
                             </a>
                         </li>
-                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Kelas"
-                        class="@if(Str::contains(request()->url(), route('sekolah.kelas.index'))) active @endif">
-                            <a href="{{ route('sekolah.kelas.index') }}"><i class="ion ion-ios-book"></i> Data Kelas</a>
+                        <li class="@if(Route::currentRouteName() == 'siswa.pelanggaran') active @endif" data-toggle="tooltip" data-placement="right" title=""
+                            data-original-title="Halaman Utama">
+                            <a href="{{ route('siswa.pelanggaran') }}">
+                                <i class="ion ion-speedometer"></i>
+                                <span>Detail pelanggaran</span>
+                            </a>
                         </li>
-                        <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jenis Pelanggaran"
-                        class="@if(Str::contains(request()->url(), route('sekolah.jenis-pelanggaran.index'))) active @endif">
-                            <a href="{{ route('sekolah.jenis-pelanggaran.index') }}"><i class="ion ion-document-text"></i> Jenis Pelanggaran</a>
-                        </li>
-
-                        @if (auth()->user()->role == 'admin')
-                            <li data-toggle='tooltip' data-placement='right' data-original-title='Data Akun Pengguna'
-                            class="@if(Str::contains(request()->url(), route('sekolah.akun.index'))) active @endif">
-                                <a href='{{ route('sekolah.akun.index') }}'><i class='ion ion-key'></i> Manajemen Akun</a>
+                        @else
+                            <li class="@if(Str::contains(request()->url(), route('sekolah.dashboard'))) active @endif" data-toggle="tooltip" data-placement="right" title=""
+                                data-original-title="Halaman Utama">
+                                <a href="{{ route('sekolah.dashboard') }}">
+                                    <i class="ion ion-speedometer"></i>
+                                    <span>Dashboard</span>
+                                </a>
                             </li>
+                            <li data-toggle="tooltip" data-placement="right" data-original-title="Data Siswa"
+                            class="@if(Str::contains(request()->url(), route('siswa.data'))) active @endif">
+                                <a href="{{ route('siswa.data') }}"><i class="ion ion-ios-people"></i> Data Siswa</a>
+                            </li>
+                            <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jurusan"
+                            class="@if(Str::contains(request()->url(), route('sekolah.jurusan.index'))) active @endif">
+                                <a href="{{ route('sekolah.jurusan.index') }}">
+                                    <i class="ion ion-university"></i> Data Jurusan
+                                </a>
+                            </li>
+                            <li data-toggle="tooltip" data-placement="right" data-original-title="Data Kelas"
+                            class="@if(Str::contains(request()->url(), route('sekolah.kelas.index'))) active @endif">
+                                <a href="{{ route('sekolah.kelas.index') }}"><i class="ion ion-ios-book"></i> Data Kelas</a>
+                            </li>
+                            <li data-toggle="tooltip" data-placement="right" data-original-title="Data Jenis Pelanggaran"
+                            class="@if(Str::contains(request()->url(), route('sekolah.jenis-pelanggaran.index'))) active @endif">
+                                <a href="{{ route('sekolah.jenis-pelanggaran.index') }}"><i class="ion ion-document-text"></i> Jenis Pelanggaran</a>
+                            </li>
+
+                            @if (auth()->user()->role == 'admin')
+                                <li data-toggle='tooltip' data-placement='right' data-original-title='Data Akun Pengguna'
+                                class="@if(Str::contains(request()->url(), route('sekolah.akun.index'))) active @endif">
+                                    <a href='{{ route('sekolah.akun.index') }}'><i class='ion ion-key'></i> Manajemen Akun</a>
+                                </li>
+                            @endif
+
+                            @if (auth()->user()->role == 'pegawai')
+                            <li data-toggle="tooltip" data-placement="right" data-original-title="Pelanggaran Siswa"
+                                class="@if(Str::contains(request()->url(), route('sekolah.pelanggaran-siswa.index')))active @endif">
+                                <a href="{{ route('sekolah.pelanggaran-siswa.index') }}">
+                                    <i class="ion ion-ios-book"></i> Pelanggaran Siswa
+                                </a>
+                            </li>
+                            @endif
                         @endif
                     </ul>
                 </aside>

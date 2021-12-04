@@ -23,9 +23,7 @@
                         <th>Nama</th>
                         <th>Username</th>
                         <th>Role</th>
-                        @if (auth()->user()->role == 'admin')
                         <th>Plain Password</th>
-                        @endif
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -36,9 +34,7 @@
                         <td>{{ $data['nama'] }}</td>
                         <td>{{ $data['username'] }}</td>
                         <td>{{ $data['role'] }}</td>
-                        @if (auth()->user()->role == 'admin')
                         <td>{{ $data['plain_password'] }}</td>
-                        @endif
                         <td>
                             <a href='{{ route('sekolah.akun.edit', $data['id_akun']) }}' class='btn btn-sm btn-blue' style='margin: 5px'>
                                 <span class='ion-android-create' aria-hidden='true'></span>

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pelanggaran;
+use App\Models\PelanggaranSiswa;
 use Illuminate\Database\Seeder;
 
-class PelanggaranSeeder extends Seeder
+class PelanggaranSiswaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class PelanggaranSeeder extends Seeder
      */
     public function run()
     {
-        Pelanggaran::create( [
+        PelanggaranSiswa::create( [
             'NIS'=>891738,
             'nama_siswa'=>'Bariq',
             'jenis_pelanggaran'=>'terlambat',
@@ -25,7 +25,7 @@ class PelanggaranSeeder extends Seeder
 
 
 
-        Pelanggaran::create( [
+        PelanggaranSiswa::create( [
             'NIS'=>1910,
             'nama_siswa'=>'Almira Van Fadhilla',
             'jenis_pelanggaran'=>'terlambat',
@@ -36,7 +36,7 @@ class PelanggaranSeeder extends Seeder
 
 
 
-        Pelanggaran::create( [
+        PelanggaranSiswa::create( [
             'NIS'=>891738,
             'nama_siswa'=>'Bariq',
             'jenis_pelanggaran'=>'terlambat',
@@ -47,7 +47,7 @@ class PelanggaranSeeder extends Seeder
 
 
 
-        Pelanggaran::create( [
+        PelanggaranSiswa::create( [
             'NIS'=>891738,
             'nama_siswa'=>'Bariq',
             'jenis_pelanggaran'=>'terlambat',
@@ -58,7 +58,7 @@ class PelanggaranSeeder extends Seeder
 
 
 
-        Pelanggaran::create( [
+        PelanggaranSiswa::create( [
             'NIS'=>891738,
             'nama_siswa'=>'Bariq',
             'jenis_pelanggaran'=>'terlambat',
@@ -66,7 +66,5 @@ class PelanggaranSeeder extends Seeder
             'keterangan'=>' sa fa fasf ',
             'tanggal'=>'2021-12-08'
         ]);
-
-
     }
 }

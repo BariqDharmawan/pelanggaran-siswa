@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SiswaSeeder::class,
             SanksiSeeder::class,
-            PelanggaranSeeder::class,
+            PelanggaranSiswaSeeder::class,
             KelasSeeder::class,
             JurusanSeeder::class,
             JenisPelanggaranSeeder::class

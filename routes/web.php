@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\JenisPelanggaranController;
+use App\Http\Controllers\PelanggaranSiswaController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,7 @@ Route::permanentRedirect('/', 'sekolah/dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('siswa/data', [SiswaController::class, 'manage'])->name('siswa.data');
+    Route::get('siswa/pelanggaran', [SiswaController::class, 'pelanggaran'])->name('siswa.pelanggaran');
     Route::resource('siswa', SiswaController::class);
 
     Route::prefix('sekolah')->name('sekolah.')->middleware('auth')->group(function () {
@@ -28,6 +30,7 @@ Route::middleware('auth')->group(function () {
            Route::delete('{kelas}', [KelasController::class, 'destroy'])->name('destroy');
        });
        Route::resource('jenis-pelanggaran', JenisPelanggaranController::class);
+       Route::resource('pelanggaran-siswa', PelanggaranSiswaController::class);
        Route::resource('akun', AkunController::class);
     });
 });

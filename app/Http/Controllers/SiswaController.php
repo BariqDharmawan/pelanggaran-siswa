@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Kelas;
+use App\Models\PelanggaranSiswa;
+use App\Models\Sanksi;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class SiswaController extends Controller
 {
@@ -17,13 +20,27 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        $sanksi = Sanksi::all();
+        $topSiswa = Siswa::orderBy('total_poin', 'desc')->take(5)->get();
+        $profile = Siswa::where('nama_siswa', auth()->user()->nama)->first();
+
+        $totalPelanggaran = PelanggaranSiswa::where('NIS', $profile->NIS)->count();
+
+        return view('siswa.index', compact('sanksi', 'topSiswa', 'profile', 'totalPelanggaran'));
     }
 
     public function manage()
     {
         $siswas = Siswa::all();
         return view('siswa.manage', compact('siswas'));
+    }
+
+    public function show(Siswa $siswa)
+    {
+        $username = User::where('nama', $siswa->nama_siswa)->first()->username;
+        $profile = Siswa::where('nama_siswa', auth()->user()->nama)->first();
+
+        return view('siswa.show', compact('siswa', 'username', 'profile'));
     }
 
     /**
@@ -36,6 +53,14 @@ class SiswaController extends Controller
         $listKelas = Kelas::select('nama_kelas')->get();
         $listJurusan = Jurusan::select('nama_jurusan')->get();
         return view('siswa.add', compact('listKelas', 'listJurusan'));
+    }
+
+    public function pelanggaran()
+    {
+        $profile = Siswa::where('nama_siswa', auth()->user()->nama)->first();
+        $pelanggaran = PelanggaranSiswa::where('NIS', $profile->NIS)->orderBy('tanggal', 'desc')->get();
+
+        return view('siswa.pelanggaran', compact('pelanggaran', 'profile'));
     }
 
     /**
@@ -104,7 +129,11 @@ class SiswaController extends Controller
 
         $siswa->save();
 
-        return redirect()->route('siswa.data')->with('success', "Berhasil mengubah data siswa $siswa->nama_siswa");
+        $prevUrl = str_replace(url('/'), '', url()->previous());
+        $routeRedirect = $prevUrl == '/siswa/' . $siswa->NIS ? 'siswa.index' : 'siswa.data';
+
+
+        return redirect()->route($routeRedirect)->with('success', "Berhasil mengubah data siswa $siswa->nama_siswa");
     }
 
     /**
